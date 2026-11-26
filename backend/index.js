@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 6000;
 app.use(cors({
   origin(origin, callback) {
-    const allowedOrigins = (process.env.CLIENT_URL || "https://airbnbin.onrender.com,http://localhost:5173")
+    const allowedOrigins = (process.env.CLIENT_URL || "https://airbnb-1-jii4.onrender.com,http://localhost:5173")
       .split(",").map((item) => item.trim()).filter(Boolean);
     if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
     return callback(new Error(`CORS blocked for origin: ${origin}`));
