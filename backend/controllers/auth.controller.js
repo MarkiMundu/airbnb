@@ -34,18 +34,7 @@ export const login = async (req, res) => {
     if (!email || !password) return res.status(400).json({ message: "Email and password are required" });
     const user = await User.findOne({ email }).populate("listing").populate("booking");
     if (!user || !(await bcrypt.compare(password, user.password))) return res.status(401).json({ message: "Invalid email or password" });
-
-    //temporary logging for debugging
-    console.log("NODE_ENV:", process.env.NODE_ENV);
-    console.log("Cookie Options:", cookieOptions);
-
     res.cookie("token", genToken(user._id), cookieOptions);
-    //temporary logging for debugging
-    console.log("Login Cookie Sent");
-    console.log("Token Created:", !!genToken(user._id));
-  //temporary logging for debugging
-    console.log("Headers Sent:", res.getHeaders());
-
     return res.status(200).json(publicUser(user));
   } catch (error) {
     console.error("Login error:", error);
