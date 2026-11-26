@@ -43,6 +43,8 @@ export const login = async (req, res) => {
     //temporary logging for debugging
     console.log("Login Cookie Sent");
     console.log("Token Created:", !!genToken(user._id));
+  //temporary logging for debugging
+    console.log("Headers Sent:", res.getHeaders());
 
     return res.status(200).json(publicUser(user));
   } catch (error) {
